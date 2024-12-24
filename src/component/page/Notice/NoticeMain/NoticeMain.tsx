@@ -39,6 +39,8 @@ export const NoticeMain = () => {
         setModal(!modal);
     };
 
+    const mainTest = () => {};
+
     return (
         <>
             총 갯수 : {listCount} 현재 페이지 : 0
