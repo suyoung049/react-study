@@ -25,6 +25,8 @@ export const NoticeSearch = () => {
 
     const asdf = () => {};
 
+    const qwer = () => {};
+
     return (
         <NoticeSearchStyled>
             <div className="input-box">
