@@ -39,7 +39,7 @@ export const NoticeMain = () => {
         setModal(!modal);
     };
 
-    const mainTest = () => {};
+    const mainTest2 = () => {};
 
     return (
         <>
