@@ -9,6 +9,8 @@ export const NoticeModal = () => {
     const handlerModal = () => {
         setModal(!modal);
     };
+
+    const otherTest = () => {};
     return (
         <NoticeModalStyled>
             <div className="container">

@@ -23,6 +23,8 @@ export const NoticeSearch = () => {
         navigate(`/react/board/notice.do${queryString}`);
     };
 
+    const asdf = () => {};
+
     return (
         <NoticeSearchStyled>
             <div className="input-box">
