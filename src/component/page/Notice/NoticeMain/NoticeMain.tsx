@@ -1,6 +1,6 @@
 import { useLocation } from 'react-router-dom';
 import { StyledTable, StyledTd, StyledTh } from '../../../common/styled/StyledTable';
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
 import { useEffect, useState } from 'react';
 import { NoticeModal } from '../NoticeModal/NoticeModal';
 import { Portal } from '../../../common/potal/Portal';
@@ -12,6 +12,11 @@ interface INotice {
     title: string;
     author: string;
     createdDate: string;
+}
+
+interface INoticeResponse {
+    noticeList: INotice[];
+    noticeCnt: number;
 }
 
 export const NoticeMain = () => {
@@ -30,7 +35,7 @@ export const NoticeMain = () => {
         searchParam.append('currentPage', currentPage.toString());
         searchParam.append('pageSize', '5');
 
-        axios.post('/management/noticeListJson.do', searchParam).then((res) => {
+        axios.post('/management/noticeListJson.do', searchParam).then((res: AxiosResponse<INoticeResponse>) => {
             setNoticeList(res.data.noticeList);
             setListCount(res.data.noticeCnt);
         });
