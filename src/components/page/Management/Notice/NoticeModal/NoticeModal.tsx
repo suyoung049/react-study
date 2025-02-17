@@ -2,7 +2,7 @@ import React, { ChangeEvent, FC, useEffect, useRef, useState } from "react";
 import { NoticeModalStyled } from "./styled";
 import { useRecoilState } from "recoil";
 import axios, { AxiosResponse } from "axios";
-import { modalState } from "@/stores/modalState";
+import { modalState } from "../../../../../stores/modalState";
 
 interface NoticeModalProps {
     id: number;

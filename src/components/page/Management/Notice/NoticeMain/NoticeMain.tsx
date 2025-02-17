@@ -2,14 +2,14 @@ import { useLocation } from "react-router-dom";
 import axios, { AxiosResponse } from "axios";
 import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
+import { NoticeModal } from "../NoticeModal/NoticeModal";
+import { modalState } from "../../../../../stores/modalState";
 import {
     StyledTable,
     StyledTd,
     StyledTh,
-} from "@/component/common/styled/StyledTable";
-import { Portal } from "@/component/common/potal/Portal";
-import { NoticeModal } from "../NoticeModal/NoticeModal";
-import { modalState } from "@/stores/modalState";
+} from "../../../../common/styled/StyledTable";
+import { Portal } from "../../../../common/potal/Portal";
 
 interface INotice {
     noticeId: number;

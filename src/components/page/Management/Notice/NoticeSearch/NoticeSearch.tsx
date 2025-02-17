@@ -3,7 +3,7 @@ import Button from "react-bootstrap/Button";
 import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
-import { modalState } from "@/stores/modalState";
+import { modalState } from "../../../../../stores/modalState";
 
 export const NoticeSearch = () => {
     const title = useRef<HTMLInputElement>();

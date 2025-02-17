@@ -1,19 +1,24 @@
-import { RouteObject, createBrowserRouter } from 'react-router-dom';
-import { Login } from '../pages/Login';
-import { DashBoard } from '../component/layout/DashBoard/DashBoard';
-import { NotFound } from '../component/common/NotFound/NotFound';
-import { Notice } from '../pages/management/Notice';
+import { RouteObject, createBrowserRouter } from "react-router-dom";
+
+import { CommonCode } from "../../src/pages/management/CommonCode";
+import { Login } from "../../src/pages/Login";
+import { Notice } from "../../src/pages/management/Notice";
+import { DashBoard } from "../components/layout/DashBoard/DashBoard";
+import { NotFound } from "../components/common/NotFound/NotFound";
 
 const routers: RouteObject[] = [
-    { path: '*', element: <NotFound /> },
-    { path: '/', element: <Login /> },
+    { path: "*", element: <NotFound /> },
+    { path: "/", element: <Login /> },
     {
-        path: '/react',
+        path: "/react",
         element: <DashBoard />,
         children: [
             {
-                path: 'management',
-                children: [{ path: 'notice', element: <Notice /> }],
+                path: "management",
+                children: [
+                    { path: "notice", element: <Notice /> },
+                    { path: "common-code", element: <CommonCode /> },
+                ],
             },
         ],
     },
