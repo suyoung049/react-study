@@ -1,5 +1,9 @@
 import { useLocation } from 'react-router-dom';
-import { StyledTable, StyledTd, StyledTh } from '../../../common/styled/StyledTable';
+import {
+    StyledTable,
+    StyledTd,
+    StyledTh,
+} from '../../../common/styled/StyledTable';
 import axios, { AxiosResponse } from 'axios';
 import { useEffect, useState } from 'react';
 import { NoticeModal } from '../NoticeModal/NoticeModal';
@@ -35,21 +39,23 @@ export const NoticeMain = () => {
         searchParam.append('currentPage', currentPage.toString());
         searchParam.append('pageSize', '5');
 
-        axios.post('/management/noticeListJson.do', searchParam).then((res: AxiosResponse<INoticeResponse>) => {
-            setNoticeList(res.data.noticeList);
-            setListCount(res.data.noticeCnt);
-        });
+        axios
+            .post('/management/noticeListJson.do', searchParam)
+            .then((res: AxiosResponse<INoticeResponse>) => {
+                setNoticeList(res.data.noticeList);
+                setListCount(res.data.noticeCnt);
+            });
     };
 
-    const handlerModal = (id:number) => {
+    const handlerModal = (id: number) => {
         setModal(!modal);
-        setNoticeId(id)
+        setNoticeId(id);
     };
 
     const postSuccess = () => {
         setModal(!modal);
         searchNoitceList();
-    }
+    };
     return (
         <>
             총 갯수 : {listCount} 현재 페이지 : 0
@@ -66,7 +72,12 @@ export const NoticeMain = () => {
                     {noticeList?.length > 0 ? (
                         noticeList?.map((notice) => {
                             return (
-                                <tr key={notice.noticeId} onClick={() => handlerModal(notice.noticeId)}>
+                                <tr
+                                    key={notice.noticeId}
+                                    onClick={() =>
+                                        handlerModal(notice.noticeId)
+                                    }
+                                >
                                     <StyledTd>{notice.noticeId}</StyledTd>
                                     <StyledTd>{notice.title}</StyledTd>
                                     <StyledTd>{notice.author}</StyledTd>
@@ -83,7 +94,11 @@ export const NoticeMain = () => {
             </StyledTable>
             {modal && (
                 <Portal>
-                    <NoticeModal id={noticeId} postSuccess={postSuccess} setNoticeId = {setNoticeId}/>
+                    <NoticeModal
+                        id={noticeId}
+                        postSuccess={postSuccess}
+                        setNoticeId={setNoticeId}
+                    />
                 </Portal>
             )}
         </>

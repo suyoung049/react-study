@@ -12,13 +12,19 @@ export const NoticeSearch = () => {
     const [modal, setModal] = useRecoilState<boolean>(modalState);
     const navigate = useNavigate();
     useEffect(() => {
-        window.location.search && navigate(window.location.pathname, { replace: true });
+        window.location.search &&
+            navigate(window.location.pathname, { replace: true });
     }, [navigate]);
+
+    const a = () => {
+        const a = 1;
+    };
 
     const handlerSearch = () => {
         const query: string[] = [];
 
-        !title.current.value || query.push(`searchTitle=${title.current.value}`);
+        !title.current.value ||
+            query.push(`searchTitle=${title.current.value}`);
         !startDate || query.push(`searchStDate=${startDate}`);
         !endDate || query.push(`searchEdDate=${endDate}`);
 
@@ -28,10 +34,16 @@ export const NoticeSearch = () => {
 
     return (
         <NoticeSearchStyled>
-            <div className="input-box">
+            <div className='input-box'>
                 <input ref={title}></input>
-                <input type="date" onChange={(e) => setStartDate(e.target.value)}></input>
-                <input type="date" onChange={(e) => setEndDate(e.target.value)}></input>
+                <input
+                    type='date'
+                    onChange={(e) => setStartDate(e.target.value)}
+                ></input>
+                <input
+                    type='date'
+                    onChange={(e) => setEndDate(e.target.value)}
+                ></input>
                 <Button onClick={handlerSearch}>검색</Button>
                 <Button onClick={() => setModal(!modal)}>등록</Button>
             </div>
