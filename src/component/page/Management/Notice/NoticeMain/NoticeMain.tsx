@@ -1,15 +1,15 @@
-import { useLocation } from 'react-router-dom';
+import { useLocation } from "react-router-dom";
+import axios, { AxiosResponse } from "axios";
+import { useEffect, useState } from "react";
+import { useRecoilState } from "recoil";
 import {
     StyledTable,
     StyledTd,
     StyledTh,
-} from '../../../common/styled/StyledTable';
-import axios, { AxiosResponse } from 'axios';
-import { useEffect, useState } from 'react';
-import { NoticeModal } from '../NoticeModal/NoticeModal';
-import { Portal } from '../../../common/potal/Portal';
-import { useRecoilState } from 'recoil';
-import { modalState } from '../../../../stores/modalState';
+} from "@/component/common/styled/StyledTable";
+import { Portal } from "@/component/common/potal/Portal";
+import { NoticeModal } from "../NoticeModal/NoticeModal";
+import { modalState } from "@/stores/modalState";
 
 interface INotice {
     noticeId: number;
@@ -36,11 +36,11 @@ export const NoticeMain = () => {
     const searchNoitceList = (currentPage?: number) => {
         currentPage = currentPage || 1;
         const searchParam = new URLSearchParams(search);
-        searchParam.append('currentPage', currentPage.toString());
-        searchParam.append('pageSize', '5');
+        searchParam.append("currentPage", currentPage.toString());
+        searchParam.append("pageSize", "5");
 
         axios
-            .post('/management/noticeListJson.do', searchParam)
+            .post("/management/noticeListJson.do", searchParam)
             .then((res: AxiosResponse<INoticeResponse>) => {
                 setNoticeList(res.data.noticeList);
                 setListCount(res.data.noticeCnt);

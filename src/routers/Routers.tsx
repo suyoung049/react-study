@@ -2,7 +2,7 @@ import { RouteObject, createBrowserRouter } from 'react-router-dom';
 import { Login } from '../pages/Login';
 import { DashBoard } from '../component/layout/DashBoard/DashBoard';
 import { NotFound } from '../component/common/NotFound/NotFound';
-import { Notice } from '../pages/Notice';
+import { Notice } from '../pages/management/Notice';
 
 const routers: RouteObject[] = [
     { path: '*', element: <NotFound /> },
@@ -10,7 +10,12 @@ const routers: RouteObject[] = [
     {
         path: '/react',
         element: <DashBoard />,
-        children: [{ path: 'management', children: [{ path: 'notice', element: <Notice /> }] }],
+        children: [
+            {
+                path: 'management',
+                children: [{ path: 'notice', element: <Notice /> }],
+            },
+        ],
     },
 ];
 

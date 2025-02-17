@@ -1,8 +1,8 @@
-import React, { ChangeEvent, FC, useEffect, useRef, useState } from 'react';
-import { NoticeModalStyled } from './styled';
-import { useRecoilState } from 'recoil';
-import { modalState } from '../../../../stores/modalState';
-import axios, { AxiosResponse } from 'axios';
+import React, { ChangeEvent, FC, useEffect, useRef, useState } from "react";
+import { NoticeModalStyled } from "./styled";
+import { useRecoilState } from "recoil";
+import axios, { AxiosResponse } from "axios";
+import { modalState } from "@/stores/modalState";
 
 interface NoticeModalProps {
     id: number;
@@ -51,21 +51,21 @@ export const NoticeModal: FC<NoticeModalProps> = ({
 
     const searchDetail = (id: number) => {
         axios
-            .post('/management/noticeFileDetail.do', { noticeId: id })
+            .post("/management/noticeFileDetail.do", { noticeId: id })
             .then((res: AxiosResponse<INoticeDetailResponse>) => {
                 // 파일은 noticeFileDetail
                 if (res.data.detailValue) {
                     setDetail(res.data.detailValue);
                     const { fileExt, logicalPath } = res.data.detailValue;
                     if (
-                        fileExt === 'jpg' ||
-                        fileExt === 'gif' ||
-                        fileExt === 'png'
+                        fileExt === "jpg" ||
+                        fileExt === "gif" ||
+                        fileExt === "png"
                     ) {
                         console.log(fileExt);
                         setImageUrl(logicalPath);
                     } else {
-                        setImageUrl('');
+                        setImageUrl("");
                     }
                 }
             });
@@ -73,65 +73,65 @@ export const NoticeModal: FC<NoticeModalProps> = ({
 
     const saveNotice = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
-        axios.post('/management/noticeSave.do', formRef.current).then((res) => {
-            res.data.result === 'success' && postSuccess();
+        axios.post("/management/noticeSave.do", formRef.current).then((res) => {
+            res.data.result === "success" && postSuccess();
         });
     };
 
     const saveNoticeFile = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
         const formData = new FormData(formRef.current);
-        fileData && formData.append('file', fileData);
-        axios.post('/management/noticeFileSave.do', formData).then((res) => {
-            res.data.result === 'success' && postSuccess();
+        fileData && formData.append("file", fileData);
+        axios.post("/management/noticeFileSave.do", formData).then((res) => {
+            res.data.result === "success" && postSuccess();
         });
     };
 
     const deleteNotice = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
         axios
-            .post('/management/noticeFileDeleteJson.do', { noticeId: id })
+            .post("/management/noticeFileDeleteJson.do", { noticeId: id })
             .then((res) => {
                 // 파일은 noticeFileDeleteJson
-                res.data.result === 'success' && postSuccess();
+                res.data.result === "success" && postSuccess();
             });
     };
 
     const updateNotice = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
         const formData = new FormData(formRef.current);
-        formData.append('noticeId', id.toString());
+        formData.append("noticeId", id.toString());
 
-        axios.post('/management/noticeUpdateJson.do', formData).then((res) => {
-            res.data.result === 'success' && postSuccess();
+        axios.post("/management/noticeUpdateJson.do", formData).then((res) => {
+            res.data.result === "success" && postSuccess();
         });
     };
 
     const updateNoticeFile = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
         const formData = new FormData(formRef.current);
-        fileData && formData.append('file', fileData);
-        formData.append('noticeId', id.toString());
+        fileData && formData.append("file", fileData);
+        formData.append("noticeId", id.toString());
 
-        axios.post('/management/noticeFileUpdate.do', formData).then((res) => {
-            res.data.result === 'success' && postSuccess();
+        axios.post("/management/noticeFileUpdate.do", formData).then((res) => {
+            res.data.result === "success" && postSuccess();
         });
     };
 
     const handlerFile = (e: ChangeEvent<HTMLInputElement>) => {
         const fileInfo = e.target.files;
         if (fileInfo?.length > 0) {
-            const fileInfoSplit = fileInfo[0].name.split('.');
+            const fileInfoSplit = fileInfo[0].name.split(".");
             const fileExtension = fileInfoSplit[1].toLowerCase();
 
             if (
-                fileExtension === 'jpg' ||
-                fileExtension === 'gif' ||
-                fileExtension === 'png'
+                fileExtension === "jpg" ||
+                fileExtension === "gif" ||
+                fileExtension === "png"
             ) {
                 setImageUrl(URL.createObjectURL(fileInfo[0]));
             } else {
-                setImageUrl('');
+                setImageUrl("");
             }
 
             setFileData(fileInfo[0]);
@@ -151,7 +151,7 @@ export const NoticeModal: FC<NoticeModalProps> = ({
                         ></input>
                     </label>
                     <label>
-                        내용 :{' '}
+                        내용 :{" "}
                         <input
                             type='text'
                             defaultValue={detail?.content}
@@ -162,7 +162,7 @@ export const NoticeModal: FC<NoticeModalProps> = ({
                     <input
                         type='file'
                         id='fileInput'
-                        style={{ display: 'none' }}
+                        style={{ display: "none" }}
                         onChange={handlerFile}
                     ></input>
                     <label className='img-label' htmlFor='fileInput'>
@@ -179,12 +179,12 @@ export const NoticeModal: FC<NoticeModalProps> = ({
                             <div>{fileData?.name}</div>
                         )}
                     </div>
-                    <div className={'button-container'}>
+                    <div className={"button-container"}>
                         <button
                             type='button'
                             onClick={id ? updateNoticeFile : saveNoticeFile}
                         >
-                            {id ? '수정' : '저장'}
+                            {id ? "수정" : "저장"}
                         </button>
                         {!!id && (
                             <button type='button' onClick={deleteNotice}>

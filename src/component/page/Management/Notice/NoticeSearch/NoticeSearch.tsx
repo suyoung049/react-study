@@ -1,9 +1,9 @@
-import { NoticeSearchStyled } from './styled';
-import Button from 'react-bootstrap/Button';
-import { useEffect, useRef, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useRecoilState } from 'recoil';
-import { modalState } from '../../../../stores/modalState';
+import { NoticeSearchStyled } from "./styled";
+import Button from "react-bootstrap/Button";
+import { useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useRecoilState } from "recoil";
+import { modalState } from "@/stores/modalState";
 
 export const NoticeSearch = () => {
     const title = useRef<HTMLInputElement>();
@@ -16,10 +16,6 @@ export const NoticeSearch = () => {
             navigate(window.location.pathname, { replace: true });
     }, [navigate]);
 
-    const a = () => {
-        const a = 1;
-    };
-
     const handlerSearch = () => {
         const query: string[] = [];
 
@@ -28,7 +24,7 @@ export const NoticeSearch = () => {
         !startDate || query.push(`searchStDate=${startDate}`);
         !endDate || query.push(`searchEdDate=${endDate}`);
 
-        const queryString = query.length > 0 ? `?${query.join('&')}` : '';
+        const queryString = query.length > 0 ? `?${query.join("&")}` : "";
         navigate(`/react/management/notice${queryString}`);
     };
 
