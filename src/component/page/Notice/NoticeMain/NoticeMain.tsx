@@ -8,7 +8,7 @@ import { useRecoilState } from 'recoil';
 import { modalState } from '../../../../stores/modalState';
 
 interface INotice {
-    noticeIdx: number;
+    noticeId: number;
     title: string;
     author: string;
     createdDate: string;
@@ -29,8 +29,8 @@ export const NoticeMain = () => {
         searchParam.append('currentPage', currentPage.toString());
         searchParam.append('pageSize', '5');
 
-        axios.post('/board/noticeListJson.do', searchParam).then((res) => {
-            setNoticeList(res.data.notice);
+        axios.post('/management/noticeListJson.do', searchParam).then((res) => {
+            setNoticeList(res.data.noticeList);
             setListCount(res.data.noticeCnt);
         });
     };
@@ -39,7 +39,6 @@ export const NoticeMain = () => {
         setModal(!modal);
     };
 
-    const mainTest2 = () => {};
 
     return (
         <>
@@ -57,8 +56,8 @@ export const NoticeMain = () => {
                     {noticeList?.length > 0 ? (
                         noticeList?.map((notice) => {
                             return (
-                                <tr key={notice.noticeIdx} onClick={handlerModal}>
-                                    <StyledTd>{notice.noticeIdx}</StyledTd>
+                                <tr key={notice.noticeId} onClick={handlerModal}>
+                                    <StyledTd>{notice.noticeId}</StyledTd>
                                     <StyledTd>{notice.title}</StyledTd>
                                     <StyledTd>{notice.author}</StyledTd>
                                     <StyledTd>{notice.createdDate}</StyledTd>

@@ -10,7 +10,7 @@ const routers: RouteObject[] = [
     {
         path: '/react',
         element: <DashBoard />,
-        children: [{ path: 'board', children: [{ path: 'notice.do', element: <Notice /> }] }],
+        children: [{ path: 'management', children: [{ path: 'notice', element: <Notice /> }] }],
     },
 ];
 
