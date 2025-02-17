@@ -18,6 +18,7 @@ export const NoticeMain = () => {
     const { search } = useLocation();
     const [noticeList, setNoticeList] = useState<INotice[]>();
     const [listCount, setListCount] = useState<number>(0);
+    const [noticeId, setNoticeId] = useState<number>(0);
     const [modal, setModal] = useRecoilState<boolean>(modalState); // recoil에 저장된 state
     useEffect(() => {
         searchNoitceList();
@@ -35,11 +36,15 @@ export const NoticeMain = () => {
         });
     };
 
-    const handlerModal = () => {
+    const handlerModal = (id:number) => {
         setModal(!modal);
+        setNoticeId(id)
     };
 
-
+    const postSuccess = () => {
+        setModal(!modal);
+        searchNoitceList();
+    }
     return (
         <>
             총 갯수 : {listCount} 현재 페이지 : 0
@@ -56,7 +61,7 @@ export const NoticeMain = () => {
                     {noticeList?.length > 0 ? (
                         noticeList?.map((notice) => {
                             return (
-                                <tr key={notice.noticeId} onClick={handlerModal}>
+                                <tr key={notice.noticeId} onClick={() => handlerModal(notice.noticeId)}>
                                     <StyledTd>{notice.noticeId}</StyledTd>
                                     <StyledTd>{notice.title}</StyledTd>
                                     <StyledTd>{notice.author}</StyledTd>
@@ -73,7 +78,7 @@ export const NoticeMain = () => {
             </StyledTable>
             {modal && (
                 <Portal>
-                    <NoticeModal />
+                    <NoticeModal id={noticeId} postSuccess={postSuccess} setNoticeId = {setNoticeId}/>
                 </Portal>
             )}
         </>
