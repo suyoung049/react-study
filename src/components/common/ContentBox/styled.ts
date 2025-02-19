@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const ContentBoxStyled = styled.div`
     background-color: #e0e0e0;
