@@ -1,7 +1,7 @@
 import { Table, Td, Th, Thead, Tr } from "./styled";
 
 export interface Column<T> {
-    key: keyof T;
+    key: keyof T | "actions";
     title: string;
     clickable?: boolean;
 }
@@ -14,6 +14,7 @@ interface TableProps<T> {
     hoverable?: boolean;
     fullWidth?: boolean;
     onCellClick?: (row: T, column: keyof T) => void;
+    renderAction?: (row: T) => React.ReactNode;
 }
 
 export const StyledTable = <T extends { [key: string]: any }>({
@@ -24,6 +25,7 @@ export const StyledTable = <T extends { [key: string]: any }>({
     hoverable,
     fullWidth,
     onCellClick,
+    renderAction,
 }: TableProps<T>) => {
     const generatedColumns =
         columns ??
@@ -43,20 +45,28 @@ export const StyledTable = <T extends { [key: string]: any }>({
                 </tr>
             </Thead>
             <tbody>
-                {data.map((row, index) => (
-                    <Tr key={index} striped={striped} hoverable={hoverable}>
-                        {generatedColumns.map((col) => (
-                            <Td
-                                key={col.key as string}
-                                bordered={bordered}
-                                clickable={col.clickable}
-                                onClick={() => col.clickable && onCellClick?.(row, col.key)}
-                            >
-                                {row[col.key] as React.ReactNode}
-                            </Td>
-                        ))}
+                {data?.length > 0 ? (
+                    data?.map((row, index) => (
+                        <Tr key={index} striped={striped} hoverable={hoverable}>
+                            {columns.map((col) => (
+                                <Td
+                                    key={col.key as string}
+                                    bordered={bordered}
+                                    clickable={col.clickable}
+                                    onClick={() => onCellClick?.(row, col.key)}
+                                >
+                                    {col.key === "actions" && renderAction
+                                        ? renderAction(row)
+                                        : (row[col.key as keyof T] as React.ReactNode)}
+                                </Td>
+                            ))}
+                        </Tr>
+                    ))
+                ) : (
+                    <Tr>
+                        <Td colSpan={columns.length}>조회 내역이 없습니다.</Td>
                     </Tr>
-                ))}
+                )}
             </tbody>
         </Table>
     );

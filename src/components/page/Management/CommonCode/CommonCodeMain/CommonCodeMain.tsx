@@ -8,6 +8,8 @@ import { CommonCodeModal } from "../CommonCodeModal/CommonCodeModal";
 import { useRecoilState } from "recoil";
 import { modalState } from "../../../../../stores/modalState";
 import { Portal } from "../../../../common/potal/Portal";
+import { Column, StyledTable } from "../../../../common/StyledTable/StyledTable";
+import { StyledButton } from "../../../../common/StyledButton/StyledButton";
 
 interface ICommonCode {
     author: string;
@@ -30,6 +32,16 @@ export const CommonCodeMain = () => {
     const navigate = useNavigate();
     const [modal, setModal] = useRecoilState(modalState);
     const [groupIdx, setGroupIdx] = useState<number>();
+
+    const columns = [
+        { key: "groupIdx", title: "번호" },
+        { key: "groupCode", title: "그룹코드", clickable: true },
+        { key: "groupName", title: "그룹코드명" },
+        { key: "note", title: "그룹코드설명" },
+        { key: "createdDate", title: "등록일" },
+        { key: "useYn", title: "사용여부" },
+        { key: "actions", title: "비고" },
+    ] as Column<ICommonCode>[];
 
     useEffect(() => {
         searchCommonCode();
@@ -57,9 +69,17 @@ export const CommonCodeMain = () => {
         searchCommonCode();
     };
 
+    const getDetailCommonCode = (groupIdx: number, groupCode: string) => {
+        navigate(`${groupIdx}`, {
+            state: {
+                groupCode: groupCode,
+            },
+        });
+    };
+
     return (
         <CommonCodeMainStyled>
-            <table>
+            {/* <table>
                 <colgroup>
                     <col style={{ width: "5%" }} />
                     <col style={{ width: "20%" }} />
@@ -115,7 +135,19 @@ export const CommonCodeMain = () => {
                         </tr>
                     )}
                 </tbody>
-            </table>
+            </table> */}
+            <StyledTable
+                data={commonCodeList}
+                columns={columns}
+                onCellClick={(row, column) => {
+                    if (column === "groupCode") getDetailCommonCode(row.groupIdx, row.groupCode); // ✅ 제목 클릭 시 모달 열기
+                }}
+                renderAction={(row) => (
+                    <StyledButton size='small' onClick={() => handlerModal(row.groupIdx)}>
+                        수정
+                    </StyledButton>
+                )}
+            />
             {modal && (
                 <Portal>
                     <CommonCodeModal

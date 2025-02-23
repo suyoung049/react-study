@@ -28,7 +28,8 @@ export const Td = styled.td.withConfig({
 })<{ bordered?: boolean; clickable?: boolean }>`
     padding: 10px;
     ${({ bordered }) => (bordered ? "border: 1px solid #ddd;" : "")}
-    ${({ clickable }) => clickable && "cursor: pointer; &:hover { background-color: #e0e0e0; }"}
+    ${({ clickable }) =>
+        clickable && "cursor: pointer; &:hover { background-color: #e0e0e0; text-decoration: underline; }"}
 `;
 
 export const Tr = styled.tr.withConfig({

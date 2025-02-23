@@ -1,34 +1,38 @@
 import styled from "styled-components";
 
 export const CommonCodeMainStyled = styled.div`
-    table {
-        width: 100%;
-        border-collapse: collapse;
-    }
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 
-    table,
-    th,
-    td {
-        border: 1px solid #ddd;
-    }
+    // table {
+    //     width: 100%;
+    //     border-collapse: collapse;
+    // }
 
-    th,
-    td {
-        padding: 12px;
-        text-align: left;
-    }
+    // table,
+    // th,
+    // td {
+    //     border: 1px solid #ddd;
+    // }
 
-    th {
-        background-color: #f4f4f4;
-        font-weight: bold;
-    }
+    // th,
+    // td {
+    //     padding: 12px;
+    //     text-align: left;
+    // }
 
-    tr:hover {
-        background-color: #f1f1f1;
-    }
+    // th {
+    //     background-color: #f4f4f4;
+    //     font-weight: bold;
+    // }
 
-    .td-pointer:hover {
-        cursor: pointer;
-        text-decoration: underline;
-    }
+    // tr:hover {
+    //     background-color: #f1f1f1;
+    // }
+
+    // .td-pointer:hover {
+    //     cursor: pointer;
+    //     text-decoration: underline;
+    // }
 `;
