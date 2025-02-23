@@ -4,12 +4,10 @@ import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import { NoticeModal } from "../NoticeModal/NoticeModal";
 import { modalState } from "../../../../../stores/modalState";
-import {
-    StyledTable,
-    StyledTd,
-    StyledTh,
-} from "../../../../common/styled/StyledTable";
+// import { StyledTable, StyledTd, StyledTh } from "../../../../common/styled/StyledTable";
 import { Portal } from "../../../../common/potal/Portal";
+import { Column, StyledTable } from "../../../../common/StyledTable/StyledTable";
+import { NoticeMainStyled } from "./styled";
 
 interface INotice {
     noticeId: number;
@@ -25,10 +23,20 @@ interface INoticeResponse {
 
 export const NoticeMain = () => {
     const { search } = useLocation();
-    const [noticeList, setNoticeList] = useState<INotice[]>();
+    const [noticeList, setNoticeList] = useState<INotice[]>([]);
     const [listCount, setListCount] = useState<number>(0);
     const [noticeId, setNoticeId] = useState<number>(0);
     const [modal, setModal] = useRecoilState<boolean>(modalState); // recoil에 저장된 state
+
+    // ✔ 타입스크립트가 columns를 Column<INotice>[]로 강제 변환하도록 유도
+    // ✔ clickable이 없는 경우 자동으로 undefined로 처리됨
+    const columns = [
+        { key: "noticeId", title: "번호" },
+        { key: "title", title: "제목", clickable: true },
+        { key: "author", title: "작성자" },
+        { key: "createdDate", title: "등록일" },
+    ] as Column<INotice>[];
+
     useEffect(() => {
         searchNoitceList();
     }, [search]);
@@ -39,12 +47,10 @@ export const NoticeMain = () => {
         searchParam.append("currentPage", currentPage.toString());
         searchParam.append("pageSize", "5");
 
-        axios
-            .post("/management/noticeListJson.do", searchParam)
-            .then((res: AxiosResponse<INoticeResponse>) => {
-                setNoticeList(res.data.noticeList);
-                setListCount(res.data.noticeCnt);
-            });
+        axios.post("/management/noticeListJson.do", searchParam).then((res: AxiosResponse<INoticeResponse>) => {
+            setNoticeList(res.data.noticeList);
+            setListCount(res.data.noticeCnt);
+        });
     };
 
     const handlerModal = (id: number) => {
@@ -57,9 +63,9 @@ export const NoticeMain = () => {
         searchNoitceList();
     };
     return (
-        <>
+        <NoticeMainStyled>
             총 갯수 : {listCount} 현재 페이지 : 0
-            <StyledTable>
+            {/* <StyledTable>
                 <thead>
                     <tr>
                         <StyledTh size={5}>번호</StyledTh>
@@ -91,16 +97,19 @@ export const NoticeMain = () => {
                         </tr>
                     )}
                 </tbody>
-            </StyledTable>
+            </StyledTable> */}
+            <StyledTable
+                data={noticeList}
+                columns={columns}
+                onCellClick={(row, column) => {
+                    if (column === "title") handlerModal(row.noticeId); // ✅ 제목 클릭 시 모달 열기
+                }}
+            ></StyledTable>
             {modal && (
                 <Portal>
-                    <NoticeModal
-                        id={noticeId}
-                        postSuccess={postSuccess}
-                        setNoticeId={setNoticeId}
-                    />
+                    <NoticeModal id={noticeId} postSuccess={postSuccess} setNoticeId={setNoticeId} />
                 </Portal>
             )}
-        </>
+        </NoticeMainStyled>
     );
 };

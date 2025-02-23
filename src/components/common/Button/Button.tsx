@@ -1,5 +1,5 @@
-import { FC } from 'react';
-import { ButtonContainer, ButtonStyled } from './styled';
+import { FC } from "react";
+import { ButtonContainer, ButtonStyled } from "./styled";
 
 export interface IButtonProps {
     children?: React.ReactNode | React.ReactNode[];

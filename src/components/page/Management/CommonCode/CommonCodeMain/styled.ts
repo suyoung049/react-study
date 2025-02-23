@@ -4,7 +4,6 @@ export const CommonCodeMainStyled = styled.div`
     table {
         width: 100%;
         border-collapse: collapse;
-        margin: 50px 0;
     }
 
     table,

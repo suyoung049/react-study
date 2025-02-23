@@ -3,6 +3,8 @@ import { NoticeModalStyled } from "./styled";
 import { useRecoilState } from "recoil";
 import axios, { AxiosResponse } from "axios";
 import { modalState } from "../../../../../stores/modalState";
+import { StyledInput } from "../../../../common/StyledInput/StyledInput";
+import { StyledButton } from "../../../../common/StyledButton/StyledButton";
 
 interface NoticeModalProps {
     id: number;
@@ -26,11 +28,7 @@ interface INoticeDetailResponse {
     detailValue: INoticeDetail;
 }
 
-export const NoticeModal: FC<NoticeModalProps> = ({
-    id,
-    postSuccess,
-    setNoticeId,
-}) => {
+export const NoticeModal: FC<NoticeModalProps> = ({ id, postSuccess, setNoticeId }) => {
     const [modal, setModal] = useRecoilState<boolean>(modalState);
     const [detail, setDetail] = useState<INoticeDetail>();
     const formRef = useRef<HTMLFormElement>(null);
@@ -51,17 +49,13 @@ export const NoticeModal: FC<NoticeModalProps> = ({
 
     const searchDetail = (id: number) => {
         axios
-            .post("/management/noticeFileDetail.do", { noticeId: id })
+            .post("/management/noticeFileDetailBody.do", { noticeId: id })
             .then((res: AxiosResponse<INoticeDetailResponse>) => {
                 // 파일은 noticeFileDetail
                 if (res.data.detailValue) {
                     setDetail(res.data.detailValue);
                     const { fileExt, logicalPath } = res.data.detailValue;
-                    if (
-                        fileExt === "jpg" ||
-                        fileExt === "gif" ||
-                        fileExt === "png"
-                    ) {
+                    if (fileExt === "jpg" || fileExt === "gif" || fileExt === "png") {
                         console.log(fileExt);
                         setImageUrl(logicalPath);
                     } else {
@@ -89,12 +83,10 @@ export const NoticeModal: FC<NoticeModalProps> = ({
 
     const deleteNotice = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
-        axios
-            .post("/management/noticeFileDeleteJson.do", { noticeId: id })
-            .then((res) => {
-                // 파일은 noticeFileDeleteJson
-                res.data.result === "success" && postSuccess();
-            });
+        axios.post("/management/noticeFileDeleteJson.do", { noticeId: id }).then((res) => {
+            // 파일은 noticeFileDeleteJson
+            res.data.result === "success" && postSuccess();
+        });
     };
 
     const updateNotice = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -124,11 +116,7 @@ export const NoticeModal: FC<NoticeModalProps> = ({
             const fileInfoSplit = fileInfo[0].name.split(".");
             const fileExtension = fileInfoSplit[1].toLowerCase();
 
-            if (
-                fileExtension === "jpg" ||
-                fileExtension === "gif" ||
-                fileExtension === "png"
-            ) {
+            if (fileExtension === "jpg" || fileExtension === "gif" || fileExtension === "png") {
                 setImageUrl(URL.createObjectURL(fileInfo[0]));
             } else {
                 setImageUrl("");
@@ -143,28 +131,18 @@ export const NoticeModal: FC<NoticeModalProps> = ({
             <div className='container'>
                 <form ref={formRef}>
                     <label>
-                        제목 :
-                        <input
-                            type='text'
-                            defaultValue={detail?.title}
-                            name='fileTitle'
-                        ></input>
+                        제목 :<StyledInput type='text' defaultValue={detail?.title} name='fileTitle'></StyledInput>
                     </label>
                     <label>
-                        내용 :{" "}
-                        <input
-                            type='text'
-                            defaultValue={detail?.content}
-                            name='fileContent'
-                        ></input>
+                        내용 : <StyledInput type='text' defaultValue={detail?.content} name='fileContent'></StyledInput>
                     </label>
                     파일 :
-                    <input
+                    <StyledInput
                         type='file'
                         id='fileInput'
                         style={{ display: "none" }}
                         onChange={handlerFile}
-                    ></input>
+                    ></StyledInput>
                     <label className='img-label' htmlFor='fileInput'>
                         파일 첨부하기
                     </label>
@@ -180,20 +158,17 @@ export const NoticeModal: FC<NoticeModalProps> = ({
                         )}
                     </div>
                     <div className={"button-container"}>
-                        <button
-                            type='button'
-                            onClick={id ? updateNoticeFile : saveNoticeFile}
-                        >
+                        <StyledButton type='button' onClick={id ? updateNoticeFile : saveNoticeFile}>
                             {id ? "수정" : "저장"}
-                        </button>
+                        </StyledButton>
                         {!!id && (
-                            <button type='button' onClick={deleteNotice}>
+                            <StyledButton type='button' onClick={deleteNotice}>
                                 삭제
-                            </button>
+                            </StyledButton>
                         )}
-                        <button type='button' onClick={handlerModal}>
+                        <StyledButton type='button' onClick={handlerModal}>
                             나가기
-                        </button>
+                        </StyledButton>
                     </div>
                 </form>
             </div>

@@ -20,9 +20,19 @@ interface ICommonCode {
     useYn: string;
 }
 
+const initialCommonCode: ICommonCode = {
+    author: "",
+    createdDate: "",
+    groupCode: "",
+    groupIdx: 0,
+    groupName: "",
+    note: "",
+    useYn: "N",
+};
+
 export const CommonCodeModal: FC<ICommonCodeModalProps> = ({ groupIdx, setGroupIdx, postSuccess }) => {
     const [modal, setModal] = useRecoilState(modalState);
-    const [commonCode, setCommonCode] = useState<ICommonCode>();
+    const [commonCode, setCommonCode] = useState<ICommonCode>(initialCommonCode);
 
     useEffect(() => {
         groupIdx && commonCodeDetail();
@@ -31,6 +41,10 @@ export const CommonCodeModal: FC<ICommonCodeModalProps> = ({ groupIdx, setGroupI
             setGroupIdx(0);
         };
     }, []);
+
+    useEffect(() => {
+        console.log(commonCode);
+    }, [commonCode]);
 
     const commonCodeDetail = () => {
         axios
@@ -41,6 +55,7 @@ export const CommonCodeModal: FC<ICommonCodeModalProps> = ({ groupIdx, setGroupI
     };
 
     const saveCommonCode = () => {
+        console.log(commonCode);
         axios.post("/management/commonCodeSaveBody.do", commonCode).then((res: AxiosResponse<{ result: string }>) => {
             if (res.data.result === "success") {
                 postSuccess();
@@ -78,7 +93,11 @@ export const CommonCodeModal: FC<ICommonCodeModalProps> = ({ groupIdx, setGroupI
                 <label>
                     그룹코드*
                     <input
-                        onChange={(e) => setCommonCode({ ...commonCode, groupCode: e.target.value })}
+                        // setCommonCode({ ...commonCode, groupCode: "test" });일 경우 { ...undefined, groupCode: e.target.value } 이렇게 발생할 수 있다.
+                        // 이전 상태의 값을 유지하고 새로운 값을 추가하기 위한 방법이다.
+                        // 근데 이러면 최초에 변경할 때 { ...undefined, groupCode: e.target.value }과 같은 문제가 발생할 수 있으니까, 그냥 초기값 만들자
+                        // setCommonCode((prev) => ({ ...(prev || {}), groupCode: e.target.value })) 이렇게 하고 싶은데 타입 에러 발생함
+                        onChange={(e) => setCommonCode((prev) => ({ ...prev, groupCode: e.target.value }))}
                         type='text'
                         defaultValue={commonCode?.groupCode}
                     ></input>
@@ -88,7 +107,7 @@ export const CommonCodeModal: FC<ICommonCodeModalProps> = ({ groupIdx, setGroupI
                     <input
                         type='text'
                         defaultValue={commonCode?.groupName}
-                        onChange={(e) => setCommonCode({ ...commonCode, groupName: e.target.value })}
+                        onChange={(e) => setCommonCode((prev) => ({ ...prev, groupName: e.target.value }))}
                     ></input>
                 </label>
                 <label>
@@ -96,7 +115,7 @@ export const CommonCodeModal: FC<ICommonCodeModalProps> = ({ groupIdx, setGroupI
                     <input
                         type='text'
                         defaultValue={commonCode?.note}
-                        onChange={(e) => setCommonCode({ ...commonCode, note: e.target.value })}
+                        onChange={(e) => setCommonCode((prev) => ({ ...prev, note: e.target.value }))}
                     ></input>
                 </label>
                 <label>
@@ -108,7 +127,7 @@ export const CommonCodeModal: FC<ICommonCodeModalProps> = ({ groupIdx, setGroupI
                             name='useYn'
                             value={"Y"}
                             checked={commonCode?.useYn === "Y"}
-                            onChange={(e) => setCommonCode({ ...commonCode, useYn: e.target.value })}
+                            onChange={(e) => setCommonCode((prev) => ({ ...prev, useYn: e.target.value }))}
                         />
 
                         <label>No</label>
@@ -117,7 +136,7 @@ export const CommonCodeModal: FC<ICommonCodeModalProps> = ({ groupIdx, setGroupI
                             name='useYn'
                             value={"N"}
                             checked={!commonCode?.useYn || commonCode?.useYn === "N"} // 값이 없거나 "N"일 때
-                            onChange={(e) => setCommonCode({ ...commonCode, useYn: e.target.value })}
+                            onChange={(e) => setCommonCode((prev) => ({ ...prev, useYn: e.target.value }))}
                         />
                     </div>
                 </label>

@@ -1,3 +1,4 @@
+import styled from "styled-components";
 import { CommonCodeProvider } from "../../api/Provider/CommonCodeProvider";
 import { ContentBox } from "../../components/common/ContentBox/ContentBox";
 import { CommonCodeMain } from "../../components/page/Management/CommonCode/CommonCodeMain/CommonCodeMain";
@@ -7,7 +8,9 @@ export const CommonCode = () => {
     return (
         <>
             <CommonCodeProvider>
-                <ContentBox>공통코드관리</ContentBox>
+                <ContentBox variant='info' fontSize='large'>
+                    공통코드관리
+                </ContentBox>
                 <CommonCodeSearch />
                 <CommonCodeMain />
             </CommonCodeProvider>
