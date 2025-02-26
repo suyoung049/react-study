@@ -1,4 +1,3 @@
-import { CommonCodeProvider } from "../../api/Provider/CommonCodeProvider";
 import { ContentBox } from "../../components/common/ContentBox/ContentBox";
 import { CommonCodeMain } from "../../components/page/Management/CommonCode/CommonCodeMain/CommonCodeMain";
 import { CommonCodeSearch } from "../../components/page/Management/CommonCode/CommonCodeSearch/CommonCodeSearch";
@@ -6,11 +5,9 @@ import { CommonCodeSearch } from "../../components/page/Management/CommonCode/Co
 export const CommonCode = () => {
     return (
         <>
-            <CommonCodeProvider>
-                <ContentBox>공통코드관리</ContentBox>
-                <CommonCodeSearch />
-                <CommonCodeMain />
-            </CommonCodeProvider>
+            <ContentBox>공통코드관리</ContentBox>
+            <CommonCodeSearch />
+            <CommonCodeMain />
         </>
     );
 };
