@@ -1,3 +1,4 @@
+import { StyledInput } from "../../../../common/StyledInput/StyledInput";
 import { CommonCodeModalStyle } from "./styled";
 
 export const CommonCodeModal = () => {
@@ -6,24 +7,24 @@ export const CommonCodeModal = () => {
             <div className='container'>
                 <label>
                     그룹코드*
-                    <input type='text'></input>
+                    <StyledInput type='text'></StyledInput>
                 </label>
                 <label>
                     그룹코드명*
-                    <input type='text'></input>
+                    <StyledInput type='text'></StyledInput>
                 </label>
                 <label>
                     그룹코드설명*
-                    <input type='text'></input>
+                    <StyledInput type='text'></StyledInput>
                 </label>
                 <label>
                     사용여부*
                     <div className='radio-group'>
                         <label>Yes</label>
-                        <input type='radio' name='useYn' value={"Y"} />
+                        <StyledInput type='radio' name='useYn' value={"Y"} />
 
                         <label>No</label>
-                        <input type='radio' name='useYn' value={"N"} />
+                        <StyledInput type='radio' name='useYn' value={"N"} />
                     </div>
                 </label>
                 <div className={"button-container"}>

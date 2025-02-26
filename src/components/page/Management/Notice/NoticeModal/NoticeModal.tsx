@@ -1,3 +1,5 @@
+import { StyledButton } from "../../../../common/StyledButton/StyledButton";
+import { StyledInput } from "../../../../common/StyledInput/StyledInput";
 import { NoticeModalStyled } from "./styled";
 
 export const NoticeModal = () => {
@@ -6,19 +8,19 @@ export const NoticeModal = () => {
             <div className='container'>
                 <form>
                     <label>
-                        제목 :<input type='text' name='fileTitle'></input>
+                        제목 :<StyledInput type='text' name='fileTitle'></StyledInput>
                     </label>
                     <label>
-                        내용 : <input type='text' name='fileContent'></input>
+                        내용 : <StyledInput type='text' name='fileContent'></StyledInput>
                     </label>
-                    파일 :<input type='file' id='fileInput' style={{ display: "none" }}></input>
+                    파일 :<StyledInput type='file' id='fileInput' style={{ display: "none" }}></StyledInput>
                     <label className='img-label' htmlFor='fileInput'>
                         파일 첨부하기
                     </label>
                     <div></div>
                     <div className={"button-container"}>
-                        <button type='button'>저장</button>
-                        <button type='button'>나가기</button>
+                        <StyledButton type='button'>저장</StyledButton>
+                        <StyledButton type='button'>나가기</StyledButton>
                     </div>
                 </form>
             </div>

@@ -1,3 +1,4 @@
+import { StyledButton } from "../../../../common/StyledButton/StyledButton";
 import { DetailSearchStyled } from "./styled";
 
 export const DetailSearch = () => {
@@ -11,8 +12,8 @@ export const DetailSearch = () => {
                             <option>상세코드</option>
                         </select>
                         <input />
-                        <button>검색</button>
-                        <button>등록</button>
+                        <StyledButton>검색</StyledButton>
+                        <StyledButton>등록</StyledButton>
                     </div>
                 </div>
             </div>

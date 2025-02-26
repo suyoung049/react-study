@@ -1,3 +1,5 @@
+import { StyledButton } from "../../../../common/StyledButton/StyledButton";
+import { StyledInput } from "../../../../common/StyledInput/StyledInput";
 import { DetailModalStyled } from "./styled";
 
 export const DetailModal = () => {
@@ -6,33 +8,33 @@ export const DetailModal = () => {
             <div className='container'>
                 <label>
                     그룹코드*
-                    <input type='text' readOnly></input>
+                    <StyledInput type='text' readOnly></StyledInput>
                 </label>
                 <label>
                     상세코드*
-                    <input type='text'></input>
+                    <StyledInput type='text'></StyledInput>
                 </label>
                 <label>
                     상세코드명*
-                    <input type='text'></input>
+                    <StyledInput type='text'></StyledInput>
                 </label>
                 <label>
                     상세코드설명*
-                    <input type='text'></input>
+                    <StyledInput type='text'></StyledInput>
                 </label>
                 <label>
                     사용여부*
                     <div className='radio-group'>
                         <label>Yes</label>
-                        <input type='radio' name='useYn' value={"Y"} />
+                        <StyledInput type='radio' name='useYn' value={"Y"} />
 
                         <label>No</label>
-                        <input type='radio' name='useYn' value={"N"} />
+                        <StyledInput type='radio' name='useYn' value={"N"} />
                     </div>
                 </label>
                 <div className={"button-container"}>
-                    <button type='button'>저장</button>
-                    <button type='button'>나가기</button>
+                    <StyledButton type='button'>저장</StyledButton>
+                    <StyledButton type='button'>나가기</StyledButton>
                 </div>
             </div>
         </DetailModalStyled>

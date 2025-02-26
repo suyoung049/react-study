@@ -1,3 +1,4 @@
+import { StyledButton } from "../../../../common/StyledButton/StyledButton";
 import { DetailCodeMainStyled } from "./styled";
 
 export const DetailCodeMain = () => {
@@ -21,7 +22,7 @@ export const DetailCodeMain = () => {
                     </tr>
                 </tbody>
             </table>
-            <button>뒤로가기</button>
+            <StyledButton>뒤로가기</StyledButton>
         </DetailCodeMainStyled>
     );
 };

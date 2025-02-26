@@ -1,3 +1,5 @@
+import { StyledButton } from "../../../../common/StyledButton/StyledButton";
+
 export const CommonCodeSearch = () => {
     return (
         <div>
@@ -9,8 +11,8 @@ export const CommonCodeSearch = () => {
                             <option value={"groupCode"}>그룹코드</option>
                         </select>
                         <input />
-                        <button>검색</button>
-                        <button>등록</button>
+                        <StyledButton>검색</StyledButton>
+                        <StyledButton>등록</StyledButton>
                     </div>
                 </div>
             </div>
