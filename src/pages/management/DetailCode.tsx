@@ -5,7 +5,9 @@ import { DetailSearch } from "../../components/page/Management/DetailCode/Detail
 export const DetailCode = () => {
     return (
         <>
-            <ContentBox>상세코드관리</ContentBox>
+            <ContentBox variant='primary' fontSize='large'>
+                상세코드관리
+            </ContentBox>
             <DetailSearch />
             <DetailCodeMain></DetailCodeMain>
         </>

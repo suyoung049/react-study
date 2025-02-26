@@ -5,7 +5,9 @@ import { CommonCodeSearch } from "../../components/page/Management/CommonCode/Co
 export const CommonCode = () => {
     return (
         <>
-            <ContentBox>공통코드관리</ContentBox>
+            <ContentBox variant='primary' fontSize='large'>
+                공통코드관리
+            </ContentBox>
             <CommonCodeSearch />
             <CommonCodeMain />
         </>
