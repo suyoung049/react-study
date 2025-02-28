@@ -50,6 +50,11 @@ export const NoticeMain = () => {
         setModal(!modal);
         setNoticeId(id);
     };
+
+    const postSuccess = () => {
+        setModal(!modal);
+        searchNoticeList();
+    };
     return (
         <>
             총 갯수 {noticeCount} : 현재 페이지 : {cPage}
@@ -89,7 +94,7 @@ export const NoticeMain = () => {
             />
             {modal && (
                 <Portal>
-                    <NoticeModal noticeId={noticeId} setNoticeId={setNoticeId} />
+                    <NoticeModal noticeId={noticeId} setNoticeId={setNoticeId} postSuccess={postSuccess} />
                 </Portal>
             )}
         </>

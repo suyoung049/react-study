@@ -1,4 +1,3 @@
-import { Button } from "react-bootstrap";
 import { StyledButton } from "../../../../common/StyledButton/StyledButton";
 import { StyledInput } from "../../../../common/StyledInput/StyledInput";
 import { NoticeSearchStyled } from "./styled";
@@ -15,7 +14,7 @@ export const NoticeSearch = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        window.location.search && navigate(window.location.pathname, {replace: true})
+        window.location.search && navigate(window.location.pathname, { replace: true });
     }, []);
 
     const handlerSearch = () => {
