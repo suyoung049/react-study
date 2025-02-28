@@ -1,5 +1,4 @@
 import { RouteObject, createBrowserRouter } from "react-router-dom";
-
 import { CommonCode } from "../../src/pages/management/CommonCode";
 import { Login } from "../../src/pages/Login";
 import { Notice } from "../../src/pages/management/Notice";
@@ -17,9 +16,10 @@ const routers: RouteObject[] = [
             {
                 path: "management",
                 children: [
-                    { path: "notice", element: <Notice /> },
-                    { path: "common-code", element: <CommonCode /> },
-                    { path: "common-code/:groupIdx", element: <DetailCode /> },
+                    {
+                        path: "notice",
+                        element: <Notice />,
+                    },
                 ],
             },
         ],
