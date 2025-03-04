@@ -29,15 +29,11 @@ export const NoticeSearch = () => {
     };
     return (
         <NoticeSearchStyled>
-            <div className='input-box'>
-                <StyledInput ref={title}></StyledInput>
-                <StyledInput type='date' onChange={(e) => setStartDate(e.target.value)}></StyledInput>
-                <StyledInput type='date' onChange={(e) => setEndDate(e.target.value)}></StyledInput>
-                <StyledButton variant='secondary' onClick={handlerSearch}>
-                    검색
-                </StyledButton>
-                <StyledButton onClick={() => setModal(!modal)}>등록</StyledButton>
-            </div>
+            <StyledInput ref={title} />
+            <StyledInput type='date' onChange={(e) => setStartDate(e.target.value)} />
+            <StyledInput type='date' onChange={(e) => setEndDate(e.target.value)} />
+            <StyledButton onClick={handlerSearch}>검색</StyledButton>
+            <StyledButton onClick={() => setModal(!modal)}>등록</StyledButton>
         </NoticeSearchStyled>
     );
 };
